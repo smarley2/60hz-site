@@ -8,6 +8,7 @@
   <title>60Hz Energias — Encerramento das atividades</title>
   <link rel="icon" type="image/svg+xml" href="assets/60hz-symbol.svg">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="support-actions.css">
 </head>
 <body>
   <header class="site-header">
@@ -67,14 +68,21 @@
               Para clientes que precisem de suporte relacionado a produtos adquiridos conosco,
               nosso canal de atendimento permanece disponível pelo e-mail:
             </p>
-            <a class="support-email" href="mailto:atendimento@60hz.com.br">atendimento@60hz.com.br</a>
+            <a class="support-email" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=atendimento@60hz.com.br&amp;su=Suporte%20-%2060Hz%20Energias" target="_blank" rel="noopener noreferrer">atendimento@60hz.com.br</a>
           </div>
 
           <div class="support-action">
-            <a class="primary-button" href="mailto:atendimento@60hz.com.br?subject=Suporte%20-%2060Hz%20Energias">
-              <span>Falar com o suporte</span>
-              <span class="button-arrow" aria-hidden="true">→</span>
-            </a>
+            <div class="support-buttons">
+              <a class="primary-button" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=atendimento@60hz.com.br&amp;su=Suporte%20-%2060Hz%20Energias" target="_blank" rel="noopener noreferrer">
+                <span>Abrir e-mail</span>
+                <span class="button-arrow" aria-hidden="true">→</span>
+              </a>
+              <button class="secondary-button" type="button" data-copy-email="atendimento@60hz.com.br">
+                <span>Copiar e-mail</span>
+                <span aria-hidden="true">⧉</span>
+              </button>
+            </div>
+            <p class="copy-status" role="status" aria-live="polite"></p>
             <p class="support-note">
               Atendimento apenas para suporte de produtos já adquiridos.
             </p>
@@ -90,5 +98,51 @@
       <span>Agradecemos por fazer parte da nossa história.</span>
     </div>
   </footer>
+  <script>
+    (() => {
+      const button = document.querySelector('[data-copy-email]');
+      const status = document.querySelector('.copy-status');
+      if (!button || !status) return;
+
+      const copyFallback = (text) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const copied = document.execCommand('copy');
+        textarea.remove();
+        return copied;
+      };
+
+      button.addEventListener('click', async () => {
+        const email = button.dataset.copyEmail;
+        let copied = false;
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(email);
+            copied = true;
+          } else {
+            copied = copyFallback(email);
+          }
+        } catch (_) {
+          copied = copyFallback(email);
+        }
+
+        status.textContent = copied
+          ? `E-mail copiado: ${email}`
+          : `Não foi possível copiar. E-mail: ${email}`;
+
+        if (copied) {
+          const original = button.querySelector('span');
+          const previous = original.textContent;
+          original.textContent = 'Copiado!';
+          window.setTimeout(() => { original.textContent = previous; }, 1800);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
