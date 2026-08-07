@@ -106,11 +106,22 @@ h1 {
   line-height: 1.48;
 }
 .accent-line {
+  position: relative;
   width: 76px;
   height: 6px;
   margin: 28px 0 24px;
+  overflow: hidden;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--yellow), var(--blue));
+  background: var(--yellow);
+}
+.accent-line::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: var(--blue);
 }
 .gratitude {
   max-width: 665px;
