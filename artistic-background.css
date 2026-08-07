@@ -55,15 +55,182 @@
 
 .hero-logo {
   z-index: 3;
-  right: 11%;
-  top: 19%;
-  width: min(23vw, 310px);
+  right: 8%;
+  top: 18%;
+  width: min(22vw, 290px);
   filter: drop-shadow(0 18px 34px rgba(0, 74, 155, .20));
 }
 
+/* Quote replaces the old eyebrow text without changing the page structure. */
+.eyebrow {
+  max-width: 470px;
+  margin-bottom: 24px;
+  color: var(--blue);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.45;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.eyebrow-icon {
+  display: none;
+}
+
+.eyebrow span:last-child {
+  font-size: 0;
+}
+
+.eyebrow span:last-child::after {
+  content: "“Foi o tempo que perdeste com tua rosa que fez tua rosa tão importante.”";
+  font-size: 16px;
+}
+
+/* Original handcrafted farewell figure, built from CSS shapes. */
 .sun-orbit,
 .energy-line {
-  display: none;
+  display: block;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.sun-orbit {
+  position: absolute;
+  top: 20%;
+  right: 36%;
+  width: 148px;
+  height: 164px;
+  border: 4px solid #d99a62;
+  border-radius: 48% 52% 46% 54% / 51% 47% 53% 49%;
+  background:
+    radial-gradient(circle at 36% 45%, #172334 0 5px, #fff 5.5px 7px, transparent 7.5px),
+    radial-gradient(circle at 65% 45%, #172334 0 5px, #fff 5.5px 7px, transparent 7.5px),
+    radial-gradient(circle at 29% 63%, rgba(231,135,102,.28) 0 10px, transparent 11px),
+    radial-gradient(circle at 72% 63%, rgba(231,135,102,.28) 0 10px, transparent 11px),
+    #f2c48f;
+  box-shadow: 0 14px 28px rgba(0,76,150,.18);
+  transform: rotate(2deg);
+}
+
+.sun-orbit::before {
+  content: "";
+  position: absolute;
+  left: 54px;
+  top: 91px;
+  width: 41px;
+  height: 20px;
+  border-bottom: 4px solid #754738;
+  border-radius: 0 0 50% 50%;
+  transform: rotate(-2deg);
+}
+
+.sun-orbit::after {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: -39px;
+  width: 177px;
+  height: 79px;
+  background: #d6a23a;
+  clip-path: polygon(0 70%, 13% 34%, 22% 62%, 34% 15%, 43% 58%, 58% 0, 62% 56%, 79% 17%, 76% 62%, 100% 38%, 88% 84%, 58% 100%, 24% 93%);
+  filter: drop-shadow(0 2px 0 #ad761b);
+}
+
+.energy-line-b {
+  position: absolute;
+  top: 46%;
+  right: 36.5%;
+  left: auto;
+  bottom: auto;
+  width: 144px;
+  height: 218px;
+  border: 4px solid #005fae;
+  border-radius: 39% 42% 22% 24% / 18% 18% 11% 11%;
+  background:
+    radial-gradient(circle at 50% 28%, #ffc100 0 6px, #d99f00 6.5px 8px, transparent 8.5px),
+    radial-gradient(circle at 50% 50%, #ffc100 0 6px, #d99f00 6.5px 8px, transparent 8.5px),
+    radial-gradient(circle at 50% 72%, #ffc100 0 6px, #d99f00 6.5px 8px, transparent 8.5px),
+    linear-gradient(145deg, #31a6ff, #006dcc);
+  box-shadow: 0 16px 28px rgba(0,77,145,.20);
+  transform: rotate(1deg);
+}
+
+.energy-line-b::before {
+  content: "";
+  position: absolute;
+  left: -17px;
+  top: -25px;
+  width: 172px;
+  height: 48px;
+  border-radius: 50%;
+  background: #ffc100;
+  box-shadow: inset 0 -7px 0 rgba(216,156,0,.24);
+  transform: rotate(4deg);
+}
+
+.energy-line-b::after {
+  content: "";
+  position: absolute;
+  left: 112px;
+  top: -7px;
+  width: 185px;
+  height: 68px;
+  border-radius: 0 80% 35% 70%;
+  background: #ffc100;
+  clip-path: polygon(0 20%, 100% 0, 78% 46%, 100% 82%, 40% 66%, 0 100%);
+  transform: rotate(11deg);
+  transform-origin: left center;
+  box-shadow: inset 0 -8px 0 rgba(216,156,0,.20);
+}
+
+.energy-line-a {
+  position: absolute;
+  top: 48%;
+  right: 47.5%;
+  left: auto;
+  bottom: auto;
+  width: 111px;
+  height: 31px;
+  border: 4px solid #005fae;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #006dcc, #31a6ff);
+  transform: rotate(-43deg);
+  transform-origin: right center;
+}
+
+.energy-line-a::after {
+  content: "";
+  position: absolute;
+  left: -35px;
+  top: -17px;
+  width: 48px;
+  height: 49px;
+  border: 4px solid #d99a62;
+  border-radius: 48% 52% 46% 54%;
+  background: #f2c48f;
+  transform: rotate(34deg);
+  box-shadow:
+    -8px -27px 0 -12px #f2c48f,
+    3px -32px 0 -12px #f2c48f,
+    14px -28px 0 -12px #f2c48f,
+    23px -20px 0 -12px #f2c48f;
+}
+
+.energy-line-a::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: -38px;
+  width: 6px;
+  height: 30px;
+  border-radius: 999px;
+  background: #f2c48f;
+  transform: rotate(8deg);
+  box-shadow:
+    12px -2px 0 #f2c48f,
+    23px 2px 0 #f2c48f,
+    33px 10px 0 #f2c48f;
 }
 
 .accent-line {
@@ -87,14 +254,14 @@
   }
 
   .hero-copy {
-    padding: 62px 0 270px;
+    padding: 62px 0 285px;
   }
 
   .hero-art {
     top: auto;
     bottom: 0;
     width: 100%;
-    height: 250px;
+    height: 270px;
     background-position: 65% center;
     background-size: cover;
   }
@@ -107,16 +274,80 @@
   }
 
   .hero-art::after {
-    right: 7%;
+    right: 5%;
     top: 18%;
     width: 165px;
     height: 165px;
   }
 
   .hero-logo {
-    top: 18%;
-    right: 7%;
-    width: 165px;
+    top: 19%;
+    right: 5%;
+    width: 155px;
+  }
+
+  .sun-orbit {
+    top: 17%;
+    right: 37%;
+    width: 90px;
+    height: 99px;
+    border-width: 3px;
+  }
+
+  .sun-orbit::before {
+    left: 32px;
+    top: 54px;
+    width: 28px;
+    height: 14px;
+    border-bottom-width: 3px;
+  }
+
+  .sun-orbit::after {
+    left: -11px;
+    top: -25px;
+    width: 109px;
+    height: 51px;
+  }
+
+  .energy-line-b {
+    top: 45%;
+    right: 37.5%;
+    width: 88px;
+    height: 135px;
+    border-width: 3px;
+  }
+
+  .energy-line-b::before {
+    left: -11px;
+    top: -17px;
+    width: 106px;
+    height: 31px;
+  }
+
+  .energy-line-b::after {
+    left: 69px;
+    width: 115px;
+    height: 44px;
+  }
+
+  .energy-line-a {
+    top: 46%;
+    right: 47%;
+    width: 69px;
+    height: 22px;
+    border-width: 3px;
+  }
+
+  .energy-line-a::after {
+    left: -27px;
+    top: -15px;
+    width: 38px;
+    height: 38px;
+    border-width: 3px;
+  }
+
+  .energy-line-a::before {
+    display: none;
   }
 
   .support-section {
@@ -125,26 +356,66 @@
 }
 
 @media (max-width: 640px) {
+  .eyebrow,
+  .eyebrow span:last-child::after {
+    font-size: 14px;
+  }
+
   .hero-copy {
-    padding: 48px 0 225px;
+    padding: 48px 0 245px;
   }
 
   .hero-art {
-    height: 205px;
+    height: 220px;
     background-position: 62% center;
   }
 
   .hero-logo {
-    top: 23%;
-    right: 6%;
-    width: 126px;
+    top: 24%;
+    right: 4%;
+    width: 104px;
   }
 
-  .hero-art::after {
-    top: 20%;
-    right: 5%;
-    width: 130px;
-    height: 130px;
+  .sun-orbit {
+    top: 19%;
+    right: 39%;
+    width: 75px;
+    height: 82px;
+  }
+
+  .sun-orbit::before {
+    left: 27px;
+    top: 44px;
+    width: 23px;
+    height: 12px;
+  }
+
+  .sun-orbit::after {
+    top: -21px;
+    width: 91px;
+    height: 43px;
+  }
+
+  .energy-line-b {
+    top: 46%;
+    right: 39%;
+    width: 72px;
+    height: 112px;
+  }
+
+  .energy-line-b::before {
+    width: 90px;
+  }
+
+  .energy-line-b::after {
+    left: 57px;
+    width: 93px;
+  }
+
+  .energy-line-a {
+    top: 47%;
+    right: 49%;
+    width: 57px;
   }
 
   .support-section {
