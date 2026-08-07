@@ -4,13 +4,13 @@
 
 **Goal:** Replace only the right-side hero artwork with the supplied painterly background and a transparent farewell-character cutout while preserving the existing page content and support behavior.
 
-**Architecture:** Keep the dependency-free static GitHub Pages site. Add two repository-local PNG assets, expose them as separate decorative layers inside the existing hero-art element, and replace the current CSS-only/embedded artwork overrides with scoped responsive rules. Validate the visual composition at desktop and mobile sizes before publishing the branch.
+**Architecture:** Keep the dependency-free static GitHub Pages site. Add two repository-local PNG assets, expose them as separate decorative layers inside the existing hero-art element, and restrict the painterly background to the right 58% of the desktop hero. Replace the fade with the approved solid elliptical curve-of-wind seam and a thin yellow border, then reset that treatment at the mobile breakpoint. Validate the visual composition at desktop and mobile sizes before merging and publishing `main`.
 
 **Tech Stack:** HTML5, CSS3, PNG assets, pytest, Python static HTTP server, GitHub Pages.
 
 ## Global Constraints
 
-- Replace only the hero artwork composition on the right side.
+- Replace only the hero artwork composition and its background treatment; preserve the existing page structure.
 - Keep the current left-side text, header, support card, footer, and support interactions unchanged.
 - Keep the page dependency-free and compatible with GitHub Pages.
 - Preserve responsive behavior from 320 px upward.
@@ -141,16 +141,34 @@ git commit -m "Layer hero background and farewell character"
 
 - [ ] **Step 1: Replace the obsolete artwork overrides**
 
-Remove the current single-line override containing the embedded sun-orbit data URI and replace it with readable, scoped rules equivalent to:
+First update `test_hero_art_background_matches_reference_treatment` in `tests/test_site.py` to require the desktop curve and its mobile reset:
+
+~~~python
+assert "border-radius: 50% 0 0 50% / 100% 0 0 100%;" in hero_art.group(1)
+assert "border-left: 3px solid rgba(255, 201, 40, 0.82);" in hero_art.group(1)
+assert "background: none;" in css
+assert "border-radius: 0;" in css
+assert "border-left: 0;" in css
+~~~
+
+Run the focused test and confirm it fails because the current desktop CSS still uses a gradient transition:
+
+~~~bash
+uv run --with pytest pytest tests/test_site.py::test_hero_art_background_matches_reference_treatment -q
+~~~
+
+Then replace the obsolete transition with readable, scoped rules equivalent to:
 
 ~~~css
 .hero-art {
   top: 0;
   right: 0;
-  width: 61%;
+  width: 58%;
   height: 100%;
   overflow: hidden;
   background: #0b56ba;
+  border-left: 3px solid rgba(255, 201, 40, 0.82);
+  border-radius: 50% 0 0 50% / 100% 0 0 100%;
 }
 
 .hero-background,
@@ -162,11 +180,11 @@ Remove the current single-line override containing the embedded sun-orbit data U
 
 .hero-background {
   z-index: 1;
-  inset: 0;
-  width: 100%;
+  inset: 0 auto 0 0;
+  width: 112%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center right;
 }
 
 .hero-character {
@@ -179,13 +197,8 @@ Remove the current single-line override containing the embedded sun-orbit data U
 }
 
 .hero-art::before {
-  content: "";
-  position: absolute;
-  z-index: 3;
-  inset: 0 auto 0 0;
-  width: 30%;
-  background: linear-gradient(90deg, #fff 0%, rgba(255, 255, 255, 0.84) 30%, rgba(255, 255, 255, 0) 100%);
-  pointer-events: none;
+  content: none;
+  background: none;
 }
 ~~~
 
@@ -202,6 +215,8 @@ Within the existing breakpoints, set the art layer below the copy:
     bottom: 0;
     width: 100%;
     height: 270px;
+    border-left: 0;
+    border-radius: 0;
   }
 
   .hero-background {
@@ -296,14 +311,14 @@ git diff HEAD~3..HEAD --stat
 
 Expected result: all tests pass, only intended site files and the design/plan documentation are present, and the diff contains the new artwork assets plus the hero markup/CSS change.
 
-### Task 5: Publish the finished change to GitHub
+### Task 5: Merge and publish the finished change to GitHub
 
 **Files:**
 - No additional files; publish the verified commits from the local repository.
 
 **Interfaces:**
 - Consumes: the verified local branch from Task 4.
-- Produces: a pushed GitHub branch and draft PR targeting the repository default branch.
+- Produces: the verified feature branch merged into `main` and the updated `main` pushed to `origin`.
 
 - [ ] **Step 1: Confirm branch and authentication state**
 
@@ -326,17 +341,30 @@ pytest tests/test_site.py -q
 git diff --check
 ~~~
 
-- [ ] **Step 3: Push the branch with tracking**
+- [ ] **Step 3: Confirm the remote base and fast-forward merge into main**
 
 ~~~bash
-git push -u origin agent/60hz-right-artwork
+git fetch origin
+git merge-base --is-ancestor origin/main main
+git checkout main
+git merge --ff-only agent/60hz-right-artwork
 ~~~
 
-- [ ] **Step 4: Open a draft pull request**
+- [ ] **Step 4: Verify the merged main branch**
 
-Create a draft PR for smarley2/60hz-site with title Match hero artwork to approved 60Hz reference and a body covering the asset composition, unchanged support behavior, responsive validation, and the pytest result.
+~~~bash
+uv run --with pytest pytest tests/test_site.py -q
+git diff --check origin/main..main
+~~~
 
-- [ ] **Step 5: Inspect the published GitHub Pages URL**
+Expected result: all tests pass and the merged branch has no whitespace errors.
+
+- [ ] **Step 5: Push main**
+
+~~~bash
+git push origin main
+~~~
+
+- [ ] **Step 6: Inspect the published GitHub Pages URL**
 
 After GitHub Pages updates, open https://smarley2.github.io/60hz-site/ and confirm the new artwork is served from the pushed branch/default deployment. Report the branch, commit, PR, test result, and any Pages propagation delay.
-
