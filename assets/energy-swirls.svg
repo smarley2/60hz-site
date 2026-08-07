@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 760" role="img" aria-labelledby="title desc">
+  <title id="title">Movimento de energia em azul e amarelo</title>
+  <desc id="desc">Composição abstrata original com pinceladas curvas e movimento, nas cores da 60Hz.</desc>
+  <defs>
+    <filter id="brush" x="-15%" y="-15%" width="130%" height="130%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012 0.055" numOctaves="2" seed="23" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="11" xChannelSelector="R" yChannelSelector="B"/>
+    </filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#ffc100" stop-opacity=".34"/>
+      <stop offset="1" stop-color="#ffc100" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="720" cy="350" r="250" fill="url(#glow)" filter="url(#soft)"/>
+
+  <g fill="none" stroke-linecap="round" filter="url(#brush)">
+    <path d="M80 610 C250 515 360 535 455 615 C555 700 720 705 870 605 C1015 510 1065 365 1018 222" stroke="#004fbd" stroke-width="78" opacity=".98"/>
+    <path d="M45 560 C230 475 360 495 478 570 C620 660 775 635 900 540 C1015 450 1030 330 985 230" stroke="#006bd9" stroke-width="58" opacity=".96"/>
+    <path d="M105 515 C265 445 392 452 500 516 C620 588 750 575 858 502 C970 425 986 324 946 244" stroke="#0090ff" stroke-width="42" opacity=".98"/>
+    <path d="M165 470 C312 414 426 420 525 478 C620 535 720 531 817 475 C906 424 946 350 927 281" stroke="#59b9ff" stroke-width="25" opacity=".9"/>
+
+    <path d="M420 160 C515 70 692 55 815 130 C948 210 1004 365 930 484 C856 602 670 623 550 542 C438 466 414 330 486 244 C545 174 668 159 743 211 C814 260 831 351 781 414 C731 478 632 482 579 428 C532 379 544 302 595 273 C638 248 694 266 710 307" stroke="#0062ce" stroke-width="62" opacity=".98"/>
+    <path d="M450 151 C553 82 692 78 795 140 C904 205 949 332 893 432 C836 534 689 568 590 511 C495 457 459 343 511 266 C560 193 662 181 726 225 C785 267 796 348 753 400 C710 451 631 454 589 414" stroke="#0090ff" stroke-width="40" opacity=".98"/>
+    <path d="M489 157 C583 105 691 110 766 160 C846 214 875 310 837 389 C799 468 698 505 624 469 C551 434 513 351 542 286 C570 224 649 205 704 239 C754 270 763 334 730 374" stroke="#8ed2ff" stroke-width="22" opacity=".92"/>
+
+    <path d="M500 515 C610 480 700 493 770 542 C840 591 932 597 1016 552" stroke="#ffc100" stroke-width="24" opacity=".98"/>
+    <path d="M435 465 C548 427 648 433 735 483 C815 529 912 532 1015 481" stroke="#ffd83e" stroke-width="14" opacity=".94"/>
+    <path d="M505 224 C605 185 714 187 810 236 C904 284 975 365 1024 450" stroke="#ffc100" stroke-width="18" opacity=".92"/>
+    <path d="M537 264 C625 232 710 235 784 273 C864 314 930 377 975 445" stroke="#ffe36c" stroke-width="10" opacity=".88"/>
+
+    <path d="M220 255 C350 195 454 184 572 201" stroke="#005ac9" stroke-width="34" opacity=".86"/>
+    <path d="M145 314 C292 248 408 240 532 260" stroke="#0090ff" stroke-width="25" opacity=".9"/>
+    <path d="M96 363 C260 302 390 300 515 329" stroke="#7acaff" stroke-width="15" opacity=".88"/>
+  </g>
+
+  <g fill="none" stroke-linecap="round" opacity=".9">
+    <path d="M235 182 l42 -12 M300 164 l30 -8 M357 150 l47 -6 M897 145 l39 18 M950 183 l28 20 M905 606 l38 -18 M827 648 l40 -13" stroke="#ffc100" stroke-width="9"/>
+    <path d="M260 226 l38 -9 M329 211 l44 -5 M995 292 l36 18 M952 565 l42 -20 M741 670 l42 -6 M662 691 l32 -2" stroke="#9ed8ff" stroke-width="8"/>
+    <path d="M165 432 l45 -12 M222 409 l35 -8 M1050 384 l31 20 M1008 510 l38 -14 M554 676 l41 4" stroke="#ffffff" stroke-opacity=".8" stroke-width="6"/>
+  </g>
+</svg>
