@@ -26,7 +26,15 @@ Bring the right side of the 60Hz Energias closure landing page closer to the app
 
 ## Visual composition
 
-On desktop, `.hero-art` remains the right-side artwork layer of the existing hero. Its painterly background fills the panel with a cover-style crop, while a transparent character cutout is positioned above it, aligned toward the bottom so the face, raised hand, coat, and scarf remain visible. A soft left-edge blend prevents a hard seam against the existing copy area.
+On desktop, `.hero-art` remains the right-side artwork layer of the existing hero. Its painterly background fills the panel with a cover-style crop, while a transparent character cutout is positioned above it, aligned toward the bottom so the face, raised hand, coat, and scarf remain visible.
+
+### Reference-background revision
+
+The painterly background occupies only the right side of the desktop hero, beginning at roughly 42% of the viewport like the supplied model. The image is slightly wider than its panel and anchored to the right so the yellow sun and full 60Hz wordmark stay visible beside the unchanged character.
+
+### Approved transition: curve of wind
+
+Replace the left-edge fade with a solid, broad elliptical curve inspired by the movement of the character's scarf. The curved seam receives a subtle yellow painted line so the boundary looks intentional and connects to the brand palette. Do not add opacity gradients, blur, particles, or new image assets. On viewports up to 980 px, reset the curve and yellow line so the existing full-width rectangular artwork block remains space-efficient.
 
 The existing CSS-only orbit, energy lines, embedded raster data, and duplicated overlaid logo are removed from the active composition. The logo and yellow sun remain supplied by the painterly background image itself.
 
@@ -61,6 +69,6 @@ Use the existing CSS files and variables. Prefer a small, explicit set of hero-a
 
 1. The right side visually uses the supplied painterly background and the supplied character, with the character in front and no visible dark rectangular backdrop.
 2. The left-side copy and support card remain functionally and textually unchanged.
-3. Desktop layout resembles the approved reference: blue/yellow painterly energy on the right, large farewell character in front, and a soft transition into the left side.
+3. Desktop layout resembles the approved reference: the blue/yellow painterly field remains on the right, meets the white copy area through the approved solid curve-of-wind seam, and keeps the large farewell character in front.
 4. Mobile layout remains readable and keeps the character/artwork visible below the copy.
 5. Existing tests pass, no `CNAME` is added, and the site remains deployable as a dependency-free GitHub Pages root site.
