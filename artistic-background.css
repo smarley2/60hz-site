@@ -16,7 +16,7 @@
 .hero-art {
   top: 0;
   right: 0;
-  width: 61%;
+  width: 58%;
   height: 100%;
   overflow: hidden;
   clip-path: none;
@@ -34,25 +34,27 @@
 
 .hero-background {
   z-index: 1;
-  inset: 0;
-  width: 100%;
+  inset: 0 auto 0 0;
+  width: 112%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center right;
 }
 
 .hero-art::before {
   content: "";
   position: absolute;
   z-index: 2;
-  inset: 0 auto 0 0;
-  width: 26%;
-  background: linear-gradient(
-    90deg,
-    #fff 0%,
-    rgba(255, 255, 255, 0.82) 34%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  top: -12%;
+  right: auto;
+  bottom: auto;
+  left: -46%;
+  width: 58%;
+  height: 124%;
+  background: #fff;
+  border: 0;
+  border-right: 3px solid rgba(255, 201, 40, 0.82);
+  border-radius: 50%;
   pointer-events: none;
 }
 
@@ -107,19 +109,12 @@
   }
 
   .hero-background {
+    width: 100%;
     object-position: 64% center;
   }
 
   .hero-art::before {
-    inset: 0 0 auto 0;
-    width: 100%;
-    height: 42%;
-    background: linear-gradient(
-      180deg,
-      #fff 0%,
-      rgba(255, 255, 255, 0.86) 28%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    content: none;
   }
 
   .hero-character {

@@ -43,3 +43,26 @@ def test_hero_art_assets_exist_and_are_referenced():
     assert character.exists()
     assert "60hz-painterly-background.png" in html + css
     assert "60hz-character-cutout.png" in html + css
+
+
+def test_hero_art_background_matches_reference_treatment():
+    css = (ROOT / "artistic-background.css").read_text(encoding="utf-8")
+    hero_art = re.search(r"\.hero-art\s*\{([^}]*)\}", css)
+    hero_background = re.search(r"\.hero-background\s*\{([^}]*)\}", css)
+    hero_before = re.search(r"\.hero-art::before\s*\{([^}]*)\}", css)
+    mobile_css = css.split("@media (max-width: 980px)", maxsplit=1)[1]
+
+    assert hero_art
+    assert hero_background
+    assert hero_before
+    assert "width: 58%;" in hero_art.group(1)
+    assert "width: 112%;" in hero_background.group(1)
+    assert "object-position: center right;" in hero_background.group(1)
+    assert 'content: "";' in hero_before.group(1)
+    assert "left: -46%;" in hero_before.group(1)
+    assert "width: 58%;" in hero_before.group(1)
+    assert "height: 124%;" in hero_before.group(1)
+    assert "background: #fff;" in hero_before.group(1)
+    assert "border-right: 3px solid rgba(255, 201, 40, 0.82);" in hero_before.group(1)
+    assert "border-radius: 50%;" in hero_before.group(1)
+    assert "content: none;" in mobile_css

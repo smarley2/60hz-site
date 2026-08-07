@@ -144,11 +144,17 @@ git commit -m "Layer hero background and farewell character"
 First update `test_hero_art_background_matches_reference_treatment` in `tests/test_site.py` to require the desktop curve and its mobile reset:
 
 ~~~python
-assert "border-radius: 50% 0 0 50% / 100% 0 0 100%;" in hero_art.group(1)
-assert "border-left: 3px solid rgba(255, 201, 40, 0.82);" in hero_art.group(1)
-assert "background: none;" in css
-assert "border-radius: 0;" in css
-assert "border-left: 0;" in css
+hero_before = re.search(r"\.hero-art::before\s*\{([^}]*)\}", css)
+mobile_css = css.split("@media (max-width: 980px)", maxsplit=1)[1]
+
+assert 'content: "";' in hero_before.group(1)
+assert "left: -46%;" in hero_before.group(1)
+assert "width: 58%;" in hero_before.group(1)
+assert "height: 124%;" in hero_before.group(1)
+assert "background: #fff;" in hero_before.group(1)
+assert "border-right: 3px solid rgba(255, 201, 40, 0.82);" in hero_before.group(1)
+assert "border-radius: 50%;" in hero_before.group(1)
+assert "content: none;" in mobile_css
 ~~~
 
 Run the focused test and confirm it fails because the current desktop CSS still uses a gradient transition:
@@ -167,8 +173,6 @@ Then replace the obsolete transition with readable, scoped rules equivalent to:
   height: 100%;
   overflow: hidden;
   background: #0b56ba;
-  border-left: 3px solid rgba(255, 201, 40, 0.82);
-  border-radius: 50% 0 0 50% / 100% 0 0 100%;
 }
 
 .hero-background,
@@ -197,8 +201,18 @@ Then replace the obsolete transition with readable, scoped rules equivalent to:
 }
 
 .hero-art::before {
-  content: none;
-  background: none;
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -12%;
+  left: -46%;
+  width: 58%;
+  height: 124%;
+  background: #fff;
+  border: 0;
+  border-right: 3px solid rgba(255, 201, 40, 0.82);
+  border-radius: 50%;
+  pointer-events: none;
 }
 ~~~
 
@@ -215,9 +229,9 @@ Within the existing breakpoints, set the art layer below the copy:
     bottom: 0;
     width: 100%;
     height: 270px;
-    border-left: 0;
-    border-radius: 0;
   }
+
+  .hero-art::before { content: none; }
 
   .hero-background {
     object-position: 64% center;
