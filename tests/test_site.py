@@ -14,8 +14,23 @@ def test_required_content_and_support_link():
     assert "Foi uma jornada incrível." in html
     assert "Após 13 anos" in html
     assert "atendimento@60hz.com.br" in html
-    assert "to=atendimento@60hz.com.br" in html
+    assert 'data-copy-email="atendimento@60hz.com.br"' in html
     assert '<meta name="viewport"' in html
+
+
+def test_support_card_is_single_column_and_email_copies_only():
+    html = (ROOT / "index.html").read_text(encoding="utf-8")
+    css = (ROOT / "styles.css").read_text(encoding="utf-8")
+    support_card = re.search(r"\.support-card\s*\{([^}]*)\}", css)
+
+    assert support_card
+    assert "grid-template-columns: 112px minmax(0, 1fr);" in support_card.group(1)
+    assert "max-width: 980px;" in support_card.group(1)
+    assert 'class="support-email" type="button"' in html
+    assert '<div class="support-action">' not in html
+    assert "mail.google.com" not in html
+    assert "navigator.clipboard.writeText(email)" in html
+    assert "status.textContent = 'Copiando…';" in html
 
 
 def test_brand_palette_present():

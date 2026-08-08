@@ -8,7 +8,6 @@
   <title>60Hz Energias — Encerramento das atividades</title>
   <link rel="icon" type="image/svg+xml" href="assets/60hz-symbol.svg">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="support-actions.css">
   <link rel="stylesheet" href="artistic-background.css">
 </head>
 <body>
@@ -67,24 +66,8 @@
               Para clientes que precisem de suporte relacionado a produtos adquiridos conosco,
               nosso canal de atendimento permanece disponível pelo e-mail:
             </p>
-            <a class="support-email" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=atendimento@60hz.com.br&amp;su=Suporte%20-%2060Hz%20Energias" target="_blank" rel="noopener noreferrer">atendimento@60hz.com.br</a>
-          </div>
-
-          <div class="support-action">
-            <div class="support-buttons">
-              <a class="primary-button" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=atendimento@60hz.com.br&amp;su=Suporte%20-%2060Hz%20Energias" target="_blank" rel="noopener noreferrer">
-                <span>Abrir e-mail</span>
-                <span class="button-arrow" aria-hidden="true">→</span>
-              </a>
-              <button class="secondary-button" type="button" data-copy-email="atendimento@60hz.com.br">
-                <span>Copiar e-mail</span>
-                <span aria-hidden="true">⧉</span>
-              </button>
-            </div>
-            <p class="copy-status" role="status" aria-live="polite"></p>
-            <p class="support-note">
-              Atendimento apenas para suporte de produtos já adquiridos.
-            </p>
+            <button class="support-email" type="button" data-copy-email="atendimento@60hz.com.br" aria-describedby="copy-status">atendimento@60hz.com.br</button>
+            <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
           </div>
         </div>
       </div>
@@ -118,6 +101,7 @@
 
       button.addEventListener('click', async () => {
         const email = button.dataset.copyEmail;
+        status.textContent = 'Copiando…';
         let copied = false;
         try {
           if (navigator.clipboard && window.isSecureContext) {
@@ -134,12 +118,6 @@
           ? `E-mail copiado: ${email}`
           : `Não foi possível copiar. E-mail: ${email}`;
 
-        if (copied) {
-          const original = button.querySelector('span');
-          const previous = original.textContent;
-          original.textContent = 'Copiado!';
-          window.setTimeout(() => { original.textContent = previous; }, 1800);
-        }
       });
     })();
   </script>

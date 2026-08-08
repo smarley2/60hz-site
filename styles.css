@@ -200,8 +200,10 @@ h1 {
 }
 .support-card {
   display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) 300px;
+  grid-template-columns: 112px minmax(0, 1fr);
   gap: 30px;
+  max-width: 980px;
+  margin: 0 auto;
   align-items: center;
   padding: 38px 40px;
   border: 1px solid rgba(18, 26, 40, 0.08);
@@ -246,52 +248,32 @@ h1 {
 }
 .support-email {
   display: inline-block;
+  padding: 0;
+  border: 0;
   color: var(--blue);
+  background: transparent;
+  font: inherit;
   font-size: clamp(22px, 2vw, 30px);
   font-weight: 850;
+  text-align: left;
   text-decoration: none;
+  cursor: pointer;
   word-break: break-word;
 }
 .support-email:hover,
 .support-email:focus-visible {
+  outline: 4px solid rgba(0,144,255,0.25);
+  outline-offset: 4px;
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 4px;
 }
-.support-action {
-  padding-left: 20px;
-  border-left: 1px solid var(--line);
-}
-.primary-button {
-  min-height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 0 22px;
-  border-radius: 14px;
-  color: #063055;
-  background: var(--yellow);
-  box-shadow: 0 10px 24px rgba(255, 193, 0, 0.25);
-  font-size: 17px;
-  font-weight: 850;
-  text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-}
-.primary-button:hover {
-  transform: translateY(-2px);
-  background: #ffd036;
-  box-shadow: 0 14px 28px rgba(255, 193, 0, 0.32);
-}
-.primary-button:focus-visible {
-  outline: 4px solid rgba(0,144,255,0.25);
-  outline-offset: 3px;
-}
-.button-arrow { font-size: 25px; }
-.support-note {
-  margin: 14px 4px 0;
-  color: var(--muted);
-  font-size: 13px;
+.copy-status {
+  min-height: 18px;
+  margin: 10px 4px 0;
+  color: var(--blue-dark);
+  font-size: 12px;
+  font-weight: 700;
   line-height: 1.45;
 }
 .site-footer {
@@ -343,13 +325,6 @@ h1 {
     width: 46px;
     height: 46px;
   }
-  .support-action {
-    grid-column: 1 / -1;
-    padding: 24px 0 0;
-    border-top: 1px solid var(--line);
-    border-left: 0;
-  }
-  .primary-button { justify-content: center; }
 }
 
 @media (max-width: 640px) {
@@ -407,8 +382,6 @@ h1 {
   .support-content h2 { font-size: 25px; }
   .support-content p:not(.support-label) { font-size: 16px; }
   .support-email { font-size: 21px; }
-  .support-action { grid-column: auto; }
-  .primary-button { width: 100%; }
   .site-footer .container { min-height: 110px; }
 }
 
