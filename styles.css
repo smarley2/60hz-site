@@ -91,6 +91,14 @@ a { color: inherit; }
   background: rgba(0, 144, 255, 0.10);
   font-size: 17px;
 }
+.eyebrow-quote {
+  color: var(--blue-dark);
+  font-size: clamp(12px, 1.15vw, 16px);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  text-transform: none;
+}
 h1 {
   max-width: 760px;
   margin: 0;

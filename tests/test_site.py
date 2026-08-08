@@ -13,6 +13,7 @@ def test_required_content_and_support_link():
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     assert "Foi uma jornada incrível." in html
     assert "Após 13 anos" in html
+    assert "Foi o tempo que perdeste com a tua rosa que fez a tua rosa tão importante." in html
     assert "atendimento@60hz.com.br" in html
     assert 'data-copy-email="atendimento@60hz.com.br"' in html
     assert '<meta name="viewport"' in html
